@@ -33,7 +33,7 @@ The application will be available at: http://localhost:8000
 ### 3. Test Accounts
 **Freelancers:**
 - Email: john@example.com
-- Password: password
+- Password: 12345
 
 - Email: mike@example.com  
 - Password: password
@@ -43,7 +43,7 @@ The application will be available at: http://localhost:8000
 - Password: password
 
 - Email: lisa@example.com
-- Password: password
+- Password: 54321
 
 ## Project Structure
 - `auth.php` - Authentication handler
