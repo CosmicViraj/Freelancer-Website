@@ -21,9 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert application
+    $status = 'pending';
     $sql = "INSERT INTO applications (job_id, freelancer_id, proposal, status) 
-            VALUES ($job_id, $freelancer_id, '$proposal', 'pending')";
-    
+            VALUES ($job_id, $freelancer_id, '$proposal', '$status')";
+
     if ($conn->query($sql) === TRUE) {
         header("Location: dashboard-freelancer.php");
         exit();
