@@ -1,14 +1,20 @@
-# Use official PHP image
-FROM php:8.2-cli
+# Use PHP 8.1 with Apache
+FROM php:8.1-apache
+
+# Install PDO MySQL and SQLite support
+RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite
+
+# Copy project files into container
+COPY . /var/www/html/
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy all files to container
-COPY . .
+# Set file permissions
+RUN chown -R www-data:www-data /var/www/html
 
-# Expose the port (same as Render start command port)
-EXPOSE 10000
+# Expose port 80
+EXPOSE 80
 
-# Start PHP built-in server
-CMD ["php", "-S", "0.0.0.0:10000"]
+# Start Apache server
+CMD ["apache2-foreground"]
