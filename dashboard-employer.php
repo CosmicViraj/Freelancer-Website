@@ -93,12 +93,11 @@ if (!$bids_result) {
                                 <i class="fas fa-door-open"></i> Open Workspace
                             </a>
                             <form action="delete_job.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
-    <input type="hidden" name="job_id" value="<?= $job['id'] ?>">
-    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
-        Delete
-    </button>
-</form>
-
+                                <input type="hidden" name="job_id" value="<?= $job['id'] ?>">
+                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                                    Delete
+                                </button>
+                            </form>
                         </div>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -119,7 +118,18 @@ if (!$bids_result) {
                             <p class="text-gray-600">Bid Amount: $<?= number_format($bid['bid_amount'], 2) ?></p>
                             <p class="text-sm text-gray-500">Proposal: <?= htmlspecialchars($bid['proposal']) ?></p>
                             <p class="text-sm text-gray-500">Status: <?= ucfirst($bid['status']) ?></p>
-                            <form action="manage_bid.php" method="POST" class="mt-2">
+                            <div class="mt-2">
+                                <?php if ($bid['status'] === 'accepted'): ?>
+                                    <a href="workspace/workspace.php?bid_id=<?= $bid['id'] ?>" class="text-blue-500 hover:underline">
+                                        Go to Workspace
+                                    </a>
+                                <?php else: ?>
+                                    <span class="text-gray-400 cursor-not-allowed" title="Accept the bid to access the workspace">
+                                        Go to Workspace (Disabled)
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                            <form action="manage_bid.php" method="POST" class="mt-2 space-x-2">
                                 <input type="hidden" name="bid_id" value="<?= $bid['id'] ?>">
                                 <button type="submit" name="action" value="accept" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Accept</button>
                                 <button type="submit" name="action" value="delete" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
